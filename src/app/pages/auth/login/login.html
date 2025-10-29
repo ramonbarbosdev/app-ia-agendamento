@@ -1,0 +1,97 @@
+<app-floating-configurator></app-floating-configurator>
+
+<div
+  class="bg-surface-50 dark:bg-surface-950 flex items-center justify-center min-h-screen overflow-hidden px-4"
+>
+  <div
+    class="flex flex-col items-center justify-center w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl"
+  >
+    <div
+      class="w-full p-1 rounded-[2rem] bg-gradient-to-b from-primary to-transparent"
+    >
+      <div
+        class="w-full bg-surface-0 dark:bg-surface-900 py-10 sm:py-16 px-6 sm:px-12 rounded-[2rem]"
+      >
+        <div class="text-center mb-8">
+          <div class="flex justify-center items-center mb-4">
+            <img src="/icone.png" alt="Logo" class="w-24 sm:w-32 lg:w-40" />
+          </div>
+          <div
+            class="text-surface-900 dark:text-surface-0 text-2xl sm:text-3xl font-medium mb-2"
+          >
+            Bem-vindo
+          </div>
+          <span class="text-muted-color text-sm sm:text-base font-medium">
+            Faça login para continuar
+          </span>
+        </div>
+
+        <form #f="ngForm" class="flex flex-col gap-4" (ngSubmit)="login()">
+          <app-layout-campo
+            [error]="errorValidacao['login']"
+            [label]="'Login:'"
+            [width]="'w-full'"
+            [sublabel]="'Informe o seu CPF como login'"
+            [describedby]="'cd_areavisita'"
+          >
+            <input
+              title="login"
+              name="login"
+              pInputText
+              id="login"
+              type="text"
+              placeholder="000.000.000-00"
+              class="w-full"
+              [(ngModel)]="objeto.login"
+              [ngClass]="{'ng-dirty ng-invalid' : errorValidacao['login']}"
+              mask="000.000.000-00"
+            />
+          </app-layout-campo>
+
+          <app-layout-campo
+            [error]="errorValidacao['senha']"
+            [label]="'Senha:'"
+            [width]="'w-full'"
+            [sublabel]="'Informe a sua Senha para autenticar'"
+            [describedby]="'senha'"
+          >
+            <p-password
+              name="senha"
+              id="senha"
+              [(ngModel)]="objeto.senha"
+              placeholder="Senha"
+              [toggleMask]="true"
+              [ngClass]="{'ng-dirty ng-invalid' : errorValidacao['senha']}"
+              [fluid]="true"
+              [feedback]="false"
+            ></p-password>
+          </app-layout-campo>
+
+          <div class="flex items-center justify-between mt-2 mb-6">
+            <div class="flex items-center gap-2 text-sm">
+              <!-- Exemplo de lembre-me -->
+              <!-- <p-checkbox
+                name="checked"
+                [(ngModel)]="checked"
+                id="rememberme1"
+                binary
+              ></p-checkbox>
+              <label for="rememberme1">Lembre-me</label> -->
+            </div>
+            <!-- <span
+              class="font-medium no-underline text-right cursor-pointer text-primary text-sm sm:text-base"
+              >Esqueceu a senha?</span
+            > -->
+          </div>
+
+          <p-button
+            type="submit"
+            label="Entrar"
+            styleClass="w-full"
+            [loading]="loading"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
