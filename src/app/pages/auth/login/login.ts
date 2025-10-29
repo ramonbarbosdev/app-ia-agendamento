@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { AppFloatingConfigurator } from '../../../layout/component/app.floatingconfigurator';
 import { RippleModule } from 'primeng/ripple';
 import { Router, RouterModule } from '@angular/router';
@@ -16,6 +16,9 @@ import { NgxMaskDirective } from 'ngx-mask';
 import { AuthService } from '../../../auth/auth.service';
 import { MessageService } from 'primeng/api';
 import { LayoutCampo } from "../../../components/layout-campo/layout-campo";
+import { SelectModule } from 'primeng/select';
+import { BaseService } from '../../../services/base.service';
+import { FlagOption } from '../../../models/flag-option';
 
 
 @Component({
@@ -33,8 +36,9 @@ import { LayoutCampo } from "../../../components/layout-campo/layout-campo";
     ReactiveFormsModule,
     MessageModule,
     NgxMaskDirective,
-    LayoutCampo
-],
+    LayoutCampo,
+    SelectModule,
+  ],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
@@ -43,14 +47,22 @@ export class Login {
   checked: boolean = false;
   loading: boolean = false;
   private router = inject(Router);
+  private baseService = inject(BaseService);
   public errorValidacao: Record<string, string> = {};
   constructor(private auth: AuthService) {}
   private messageService = inject(MessageService);
+  private cd = inject(ChangeDetectorRef);
+
+  public listaEmpresa: FlagOption[] = [];
+
+  ngOnInit(): void {
+
+    this.obterEmpresa()
+  }
 
   login() {
     if (!this.validarItens()) return;
     this.loading = true;
-
     this.auth.login(this.objeto).subscribe({
       next: (res: any) => {
         this.loading = false;
@@ -58,18 +70,17 @@ export class Login {
         this.gerenciarRotaUsuario(res);
       },
       error: (err) => {
-         this.messageService.add({
-           severity: 'error',
-           summary: err.error.message,
-         });
+        this.messageService.add({
+          severity: 'error',
+          summary: err.error.message,
+        });
         this.loading = false;
-    
       },
     });
   }
 
   gerenciarRotaUsuario(res: any) {
-    this.router.navigate(['client/home']);
+    // this.router.navigate(['client/home']);
   }
 
   validarItens(): any {
@@ -87,5 +98,25 @@ export class Login {
         return false;
       }
     }
+  }
+
+  obterEmpresa() {
+    this.baseService.findAll('empresa/').subscribe({
+      next: (res) => {
+        this.listaEmpresa = (res as any).map((index: any) => {
+          const item = new FlagOption();
+          item.code = String(index.id_tenant);
+          item.name = index.nm_empresa;
+          return item;
+        });
+
+             const selecionado = this.listaEmpresa[0];
+             this.objeto.id_tenant = String(selecionado?.code)
+        this.cd.markForCheck();
+      },
+      error: (err) => {
+        this.cd.markForCheck();
+      },
+    });
   }
 }

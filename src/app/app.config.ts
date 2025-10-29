@@ -9,7 +9,7 @@ import Aura from '@primeuix/themes/aura';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { provideEnvironmentNgxMask } from 'ngx-mask';
-// import VerdeAgro from './layout/component/VerdeAgro';
+import ZincTheme from './layout/component/ZincTheme';
 
 
 export const appConfig: ApplicationConfig = {
@@ -23,7 +23,7 @@ export const appConfig: ApplicationConfig = {
       ripple: true,
       inputVariant: 'filled',
       theme: {
-        preset: Aura,
+        preset: ZincTheme,
         options: { prefix: 'p', darkModeSelector: '.app-dark' },
       },
     }),

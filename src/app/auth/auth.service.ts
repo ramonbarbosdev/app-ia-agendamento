@@ -43,15 +43,16 @@ export class AuthService {
   }
 
   login(credenciais: any): Observable<any> {
-    return this.http
-      .post(`${this.apiUrl}/auth/login`, credenciais, { withCredentials: true })
-      .pipe(
-        tap((user) => {
-          this.userSubject.next(user);
-          sessionStorage.setItem('user', JSON.stringify(user));
-        }),
-        catchError((error) => throwError(() => error))
-      );
+    return this.http.post(`${this.apiUrl}/auth/login`, credenciais, { withCredentials: true }).pipe(
+      tap((user) => {
+        this.userSubject.next(user);
+        sessionStorage.setItem('user', JSON.stringify(user));
+      }),
+      catchError((e) => {
+        console.log(e)
+        return throwError(() => e);
+      })
+    );
   }
 
   checkAuth(): Observable<any> {
