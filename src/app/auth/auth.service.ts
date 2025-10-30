@@ -43,12 +43,23 @@ export class AuthService {
     );
   }
 
-  login(credenciais: any): Observable<any> {
-    const userJson = sessionStorage.getItem('user');
+  obterOrganizacao(credenciais: any): Observable<any> {
 
-    // if (userJson) {
-    //   return this.checkAuth(); // chama a API para validar
-    // }
+    return this.http
+      .post(`${this.apiUrl}/auth/obter-organizacao`, credenciais, { withCredentials: true })
+      .pipe(
+        tap((user) => {
+         
+        }),
+        catchError((e) => {
+          console.log(e);
+          this.exibirErros(e);
+          return throwError(() => e);
+        })
+      );
+  }
+
+  login(credenciais: any): Observable<any> {
 
     return this.http.post(`${this.apiUrl}/auth/login`, credenciais, { withCredentials: true }).pipe(
       tap((user) => {

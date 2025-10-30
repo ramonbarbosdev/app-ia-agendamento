@@ -18,7 +18,7 @@
         </span>
       </div>
 
-      <form #f="ngForm" class="flex flex-col gap-4" (ngSubmit)="login()">
+      <form #f="ngForm" class="flex flex-col gap-4" (ngSubmit)="entrar()">
         <app-layout-campo
           [error]="errorValidacao['login']"
           [label]="'Login:'"
@@ -37,26 +37,6 @@
             [(ngModel)]="objeto.login"
             [ngClass]="{ 'ng-dirty ng-invalid': errorValidacao['login'] }"
             mask="000.000.000-00"
-          />
-        </app-layout-campo>
-        <app-layout-campo
-          [error]="errorValidacao['id_tenant']"
-          [label]="'Organização:'"
-          [width]="'w-full'"
-          [sublabel]="'Informe a organização'"
-          [describedby]="'id_tenant'"
-        >
-          <p-select
-            [checkmark]="true"
-            [showClear]="true"
-            name="id_tenant"
-            [options]="listaEmpresa"
-            optionLabel="name"
-            optionValue="code"
-            placeholder="Empresas"
-            class="w-full"
-            [(ngModel)]="objeto.id_tenant"
-            [ngClass]="{ 'ng-dirty ng-invalid': errorValidacao['id_tenant'] }"
           />
         </app-layout-campo>
 
@@ -79,27 +59,19 @@
           ></p-password>
         </app-layout-campo>
 
-
         <div class="flex items-center justify-between mt-2 mb-6">
-            <div class="flex items-center gap-2 text-sm">
-              <!-- Exemplo de lembre-me -->
-              <p-checkbox
-                name="checked"
-                [(ngModel)]="checked"
-                id="rememberme1"
-                binary
-              ></p-checkbox>
-              <label for="rememberme1">Lembre-me</label>
-            </div>
-            <!-- <span
+          <div class="flex items-center gap-2 text-sm">
+            <!-- Exemplo de lembre-me -->
+            <p-checkbox name="checked" [(ngModel)]="checked" id="rememberme1" binary></p-checkbox>
+            <label for="rememberme1">Lembre-me</label>
+          </div>
+          <!-- <span
               class="font-medium no-underline text-right cursor-pointer text-primary text-sm sm:text-base"
               >Esqueceu a senha?</span
             > -->
-          </div>
+        </div>
 
-
-        <p-button type="submit" label="Entrar" styleClass="w-full mt-4" [loading]="loading" />
-
+        <p-button type="submit" label="Entrar" styleClass="w-full mt-4"  />
       </form>
     </div>
   </div>
@@ -111,3 +83,6 @@
     <div class="text-zinc-200 text-4xl font-semibold">Sistema de Agendamento IA</div>
   </div>
 </div>
+
+<app-selecionar-organizacao [visible]="visibleOrganizacao" (cancel)="hideDialog()" [objeto]="objeto" [listaEmpresa]="listaEmpresa">
+</app-selecionar-organizacao>

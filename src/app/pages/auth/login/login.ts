@@ -15,11 +15,11 @@ import { ZodError } from 'zod';
 import { NgxMaskDirective } from 'ngx-mask';
 import { AuthService } from '../../../auth/auth.service';
 import { MessageService } from 'primeng/api';
-import { LayoutCampo } from "../../../components/layout-campo/layout-campo";
+import { LayoutCampo } from '../../../components/layout-campo/layout-campo';
 import { SelectModule } from 'primeng/select';
 import { BaseService } from '../../../services/base.service';
 import { FlagOption } from '../../../models/flag-option';
-
+import { SelecionarOrganizacao } from '../selecionar-organizacao/selecionar-organizacao';
 
 @Component({
   selector: 'app-login',
@@ -38,6 +38,7 @@ import { FlagOption } from '../../../models/flag-option';
     NgxMaskDirective,
     LayoutCampo,
     SelectModule,
+    SelecionarOrganizacao,
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss',
@@ -46,10 +47,10 @@ export class Login {
   public objeto = new Auth();
   checked: boolean = false;
   loading: boolean = false;
-  private router = inject(Router);
-  private baseService = inject(BaseService);
+  visibleOrganizacao: boolean = false;
+
+  private auth = inject(AuthService);
   public errorValidacao: Record<string, string> = {};
-  constructor(private auth: AuthService) {}
   private messageService = inject(MessageService);
   private cd = inject(ChangeDetectorRef);
 
@@ -57,27 +58,30 @@ export class Login {
 
   ngOnInit(): void {
     this.verificarUsuarioLogado();
-    this.obterEmpresa();
-
   }
 
-  login() {
-    if (!this.validarItens()) return;
-    this.loading = true;
-    this.auth.login(this.objeto).subscribe({
-      next: (res: any) => {
-        this.loading = false;
+  hideDialog() {
+    this.visibleOrganizacao = false;
+  }
 
-        this.gerenciarRotaUsuario(res);
+  entrar() {
+    if (!this.validarItens()) return;
+
+    this.auth.obterOrganizacao(this.objeto).subscribe({
+      next: (res) => {
+        this.visibleOrganizacao = true;
+console.log(res);
+         this.listaEmpresa = (res.tenants as any).map((index: any) => {
+           const item = new FlagOption();
+           item.code = String(index.id_tenant);
+           item.name = index.nm_empresa;
+           return item;
+         });
       },
-      error: (err) => {
-        this.loading = false;
+      error: (e) => {
+        this.visibleOrganizacao = false;
       },
     });
-  }
-
-  gerenciarRotaUsuario(res: any) {
-    // this.router.navigate(['client/home']);
   }
 
   validarItens(): any {
@@ -97,31 +101,11 @@ export class Login {
     }
   }
 
-  obterEmpresa() {
-    this.baseService.findAll('empresa/').subscribe({
-      next: (res) => {
-        this.listaEmpresa = (res as any).map((index: any) => {
-          const item = new FlagOption();
-          item.code = String(index.id_tenant);
-          item.name = index.nm_empresa;
-          return item;
-        });
-
-        const selecionado = this.listaEmpresa[0];
-        this.objeto.id_tenant = String(selecionado?.code);
-        this.cd.markForCheck();
-      },
-      error: (err) => {
-        this.cd.markForCheck();
-      },
-    });
-  }
-
   verificarUsuarioLogado() {
     this.auth.checkAuth().subscribe({
-      next: (res) =>{
-         console.log('Usuário logado');
-      }
+      next: (res) => {
+        console.log('Usuário logado');
+      },
     });
   }
 }

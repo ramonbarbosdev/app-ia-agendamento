@@ -1,2 +1,19 @@
 @import "tailwindcss";
 @import "primeicons/primeicons.css";
+
+
+
+.flex-row-responsive {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* equivalente ao gap-4 do Tailwind */
+    margin-bottom: 1.25rem;
+    /* equivalente ao mb-5 do Tailwind */
+    width: 100%;
+
+    /* Para telas médias e maiores */
+    @media (min-width: 768px) {
+        flex-direction: row;
+    }
+}
