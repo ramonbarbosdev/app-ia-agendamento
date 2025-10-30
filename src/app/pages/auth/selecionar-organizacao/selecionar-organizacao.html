@@ -30,7 +30,7 @@
      <app-layout-campo
       [label]="'Aréa do Desenvolvedor:'"
       [width]="'w-full'"
-      *ngIf="isDev"
+      *ngIf="getVerificarPermissao() "
     >
      <p-toggleswitch [(ngModel)]="isAreaDev" />
 

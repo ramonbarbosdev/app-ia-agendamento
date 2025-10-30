@@ -1,9 +1,9 @@
-@import "tailwindcss";
+@use './tailwind.css';
+@import './layout/layout.scss';
+@plugin "tailwindcss-primeui";
+@import './demo/demo.scss';
 @import "primeicons/primeicons.css";
-@import '../src/assets/layout/layout.scss';
-// @plugin "tailwindcss-primeui";
-@import '../src/assets/demo/demo.scss';
-@import "primeicons/primeicons.css";
+
 
 .flex-row-responsive {
     display: flex;

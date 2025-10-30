@@ -41,158 +41,7 @@ export class AppMenu {
           },
         ],
       },
-      {
-        label: 'Cadastros',
-        items: [
-          {
-            label: 'Base de Dados',
-            items: [
-              {
-                label: 'Banco Contas',
-                items: [
-                  {
-                    label: 'Gerenciar Bancos',
-                    icon: 'pi pi-building',
-                    routerLink: ['/client/banco'],
-                  },
-                  {
-                    label: 'Gerenciar Agências',
-                    icon: 'pi pi-sitemap',
-                    routerLink: ['/client/agencia'],
-                  },
-                ],
-              },
-              {
-                label: 'Banco Geral',
-                items: [
-                  {
-                    label: 'Técnicos',
-                    icon: 'pi pi-users',
-                    routerLink: ['/client/tecnico'],
-                  },
-                  {
-                    label: 'Projetistas',
-                    icon: 'pi pi-pencil',
-                    routerLink: ['/client/projetista'],
-                  },
-                ],
-              },
-              {
-                label: 'Banco de Clientes',
-                items: [
-                  {
-                    label: 'Perfis de Clientes',
-                    icon: 'pi pi-id-card',
-                    routerLink: ['/client/perfilcliente'],
-                  },
-                  {
-                    label: 'Segmentação de Clientes',
-                    icon: 'pi pi-filter',
-                    routerLink: ['/client/segmentacaocliente'],
-                  },
-                  {
-                    label: 'Classificação',
-                    icon: 'pi pi-chart-line',
-                    routerLink: ['/client/scoreinterno'],
-                  },
-                  {
-                    label: 'Relacionamento com Clientes',
-                    icon: 'pi pi-users',
-                    routerLink: ['/client/relacionamentocliente'],
-                  },
-                  {
-                    label: 'Estrutura de Propriedades',
-                    icon: 'pi pi-sitemap',
-                    routerLink: ['/client/estruturapropriedade'],
-                  },
-                  {
-                    label: 'Cultura do Cliente',
-                    icon: 'pi pi-sitemap',
-                    routerLink: ['/client/culturaprincipalcliente'],
-                  },
-                ],
-              },
-              {
-                label: 'Banco de Projetos',
-                items: [
-                  {
-                    label: 'Tipo de Crédito',
-                    icon: 'pi pi-id-card',
-                    routerLink: ['/client/tipocredito'],
-                  },
-                  {
-                    label: 'Crédito Rural',
-                    icon: 'pi pi-id-card',
-                    routerLink: ['/client/tipocreditorural'],
-                  },
-                  {
-                    label: 'Linha de Crédito',
-                    icon: 'pi pi-id-card',
-                    routerLink: ['/client/linhacredito'],
-                  },
-                  {
-                    label: 'Tipo de Consorcio',
-                    icon: 'pi pi-id-card',
-                    routerLink: ['/client/tipoconsorcio'],
-                  },
-                  {
-                    label: 'Categoria Crédito Pessoal',
-                    icon: 'pi pi-id-card',
-                    routerLink: ['/client/categoriacreditopessoal'],
-                  },
-                  {
-                    label: 'Chave Crédito Pessoal',
-                    icon: 'pi pi-id-card',
-                    routerLink: ['/client/chavecreditopessoal'],
-                  },
-                  {
-                    label: 'Vendedor Crédito Pessoal',
-                    icon: 'pi pi-id-card',
-                    routerLink: ['/client/vendedorcreditopessoal'],
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            label: 'Gerenciar Clientes',
-            icon: 'pi pi-id-card',
-            routerLink: ['/client/cliente'],
-          },
-          {
-            label: 'Gerenciar Projetos',
-            icon: 'pi pi-id-card',
-            routerLink: ['/client/projeto'],
-          },
-          {
-            label: 'Área de Visitas',
-            icon: 'pi pi-id-card',
-            routerLink: ['/client/areavisita'],
-          },
-          {
-            label: 'Relatorios',
-            icon: 'pi pi-chart-bar',
-            routerLink: ['/client/relatorios'],
-            items: [
-              {
-                label: 'Relatórios Gerais',
-                icon: 'pi pi-file',
-                routerLink: ['/client/relatoriogeral'],
-              },
-              {
-                label: 'Relatórios de Projetos',
-                icon: 'pi pi-file',
-                routerLink: ['/client/relatorioprojeto'],
-              },
-              {
-                label: 'Relatórios de Fechamento',
-                icon: 'pi pi-file',
-                routerLink: ['/client/relatoriofechamento'],
-              },
-            ],
-          },
-        ],
-      },
+    
     ];
 
     if (role === 'ROLE_ADMIN') {
@@ -271,5 +120,25 @@ export class AppMenu {
         ],
       });
     }
+
+     if (role === 'ROLE_DEV') {
+       this.model.push({
+         label: 'Administração',
+         items: [
+           
+
+           {
+             label: 'Permissões',
+             icon: 'pi pi-fw pi-bookmark',
+             routerLink: ['/admin/role'],
+           },
+           {
+             label: 'Usuarios',
+             icon: 'pi pi-fw pi-bookmark',
+             routerLink: ['/admin/usuario'],
+           },
+         ],
+       });
+     }
   }
 }

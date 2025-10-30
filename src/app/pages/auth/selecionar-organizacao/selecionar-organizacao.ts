@@ -13,6 +13,8 @@ import { AuthService } from '../../../auth/auth.service';
 import { LoginSchema } from '../../../schema/login-schema';
 import { ZodError } from 'zod';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
+import { TipoRole } from '../../../enum/TipoRole';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-selecionar-organizacao',
@@ -39,16 +41,14 @@ export class SelecionarOrganizacao {
   @Input() objeto: any;
   private baseService = inject(BaseService);
   private auth = inject(AuthService);
+  private router = inject(Router);
 
   loading: boolean = false;
-  isDev: boolean = false;
   isAreaDev: boolean = false;
   private cd = inject(ChangeDetectorRef);
   public errorValidacao: Record<string, string> = {};
 
-  showDialog() {
-  
-  }
+  showDialog() {}
 
   hideDialog() {
     this.visible = false;
@@ -74,7 +74,17 @@ export class SelecionarOrganizacao {
   }
 
   gerenciarRotaUsuario(res: any) {
+    if (this.isAreaDev) {
+      this.router.navigate(['dev/home']);
+    }
     // this.router.navigate(['client/home']);
+  }
+
+  getVerificarPermissao() {
+    if (TipoRole.ROLE_DEV === this.objeto.role) {
+      return true;
+    }
+    return false;
   }
 
   validarItens(): any {
@@ -93,6 +103,4 @@ export class SelecionarOrganizacao {
       }
     }
   }
-
-  
 }

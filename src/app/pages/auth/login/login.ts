@@ -70,13 +70,14 @@ export class Login {
     this.auth.obterOrganizacao(this.objeto).subscribe({
       next: (res) => {
         this.visibleOrganizacao = true;
-console.log(res);
          this.listaEmpresa = (res.tenants as any).map((index: any) => {
            const item = new FlagOption();
            item.code = String(index.id_tenant);
            item.name = index.nm_empresa;
            return item;
          });
+
+         this.objeto.role = res.role;
       },
       error: (e) => {
         this.visibleOrganizacao = false;
