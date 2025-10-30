@@ -44,7 +44,6 @@ export class SelecionarOrganizacao {
   private router = inject(Router);
 
   loading: boolean = false;
-  isAreaDev: boolean = false;
   private cd = inject(ChangeDetectorRef);
   public errorValidacao: Record<string, string> = {};
 
@@ -74,10 +73,12 @@ export class SelecionarOrganizacao {
   }
 
   gerenciarRotaUsuario(res: any) {
-    if (this.isAreaDev) {
+
+    if (this.objeto.isAreaDev) {
       this.router.navigate(['dev/home']);
+      return;
     }
-    // this.router.navigate(['client/home']);
+    this.router.navigate(['client/home']);
   }
 
   getVerificarPermissao() {

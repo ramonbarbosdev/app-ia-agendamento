@@ -5,5 +5,6 @@ export class Auth {
   public senha: string = '';
   public role: string = '';
   public imd: string = '';
-  public id_tenant!: string ;
+  public id_tenant!: string;
+  public isAreaDev!: boolean;
 }

@@ -1,6 +1,6 @@
 <div class="flex flex-col gap-2 w-full max-w-full">
 <label
-  class="block text-sm sm:text-base font-medium  break-words min-h-[1.25rem]"
+  class="block text-sm sm:text-base font-medium wrap-break-word min-h-5"
 >
   {{ label }}
 </label>
@@ -21,7 +21,7 @@
   <small
     *ngIf="sublabel && describedby && !error"
     [id]="describedby"
-    class="block text-xs sm:text-sm text-gray-500 dark:text-gray-400 break-words"
+    class="block text-xs sm:text-sm text-gray-500 dark:text-gray-400 wrap-break-word"
   >
     {{ sublabel }}
   </small>

@@ -1,0 +1,16 @@
+<app-header-list-generico
+  [title]="'Permissões'"
+  [value]="listagem"
+  [columns]="columns"
+  [actions]="actions"
+  (add)="onAdd()"
+>
+  
+</app-header-list-generico>
+
+  <app-roleform
+    [(isDialog)]="isDialog"
+    [onReloadList]="onShow"
+    [key]="idEdicao"
+  >
+  </app-roleform>

@@ -15,11 +15,16 @@ export const authGuard: CanActivateFn = (route, state) => {
     return false;
   }
 
-  const isAdminRoute = rolesPermitidos?.includes('admin');
+  const userRole = FormatarNomeRole(user.role).toLowerCase();
 
-  if (isAdminRoute && FormatarNomeRole(user.role) !== 'admin') {
+  const roles = rolesPermitidos?.map((r) => r.toLowerCase()) ?? ['admin', 'dev'];
+
+  const permitido = roles.includes(userRole);
+
+  if (!permitido) {
     router.navigate(['/auth/access']);
     return false;
   }
+
   return true;
 };

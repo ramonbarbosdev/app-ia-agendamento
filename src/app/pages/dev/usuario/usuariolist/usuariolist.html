@@ -1,0 +1,16 @@
+<app-header-list-generico
+  [title]="'Usuarios'"
+  [value]="listagem"
+  [columns]="columns"
+  [actions]="actions"
+  (add)="onAdd()"
+>
+
+</app-header-list-generico>
+
+<app-usuarioform
+    [(isDialog)]="isDialog"
+    [onReloadList]="onShow"
+    [key]="idEdicao"
+  >
+  </app-usuarioform>
