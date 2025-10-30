@@ -56,8 +56,9 @@ export class Login {
   public listaEmpresa: FlagOption[] = [];
 
   ngOnInit(): void {
+    this.verificarUsuarioLogado();
+    this.obterEmpresa();
 
-    this.obterEmpresa()
   }
 
   login() {
@@ -70,10 +71,6 @@ export class Login {
         this.gerenciarRotaUsuario(res);
       },
       error: (err) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: err.error.message,
-        });
         this.loading = false;
       },
     });
@@ -110,13 +107,21 @@ export class Login {
           return item;
         });
 
-             const selecionado = this.listaEmpresa[0];
-             this.objeto.id_tenant = String(selecionado?.code)
+        const selecionado = this.listaEmpresa[0];
+        this.objeto.id_tenant = String(selecionado?.code);
         this.cd.markForCheck();
       },
       error: (err) => {
         this.cd.markForCheck();
       },
+    });
+  }
+
+  verificarUsuarioLogado() {
+    this.auth.checkAuth().subscribe({
+      next: (res) =>{
+         console.log('Usuário logado');
+      }
     });
   }
 }

@@ -79,7 +79,27 @@
           ></p-password>
         </app-layout-campo>
 
+
+        <div class="flex items-center justify-between mt-2 mb-6">
+            <div class="flex items-center gap-2 text-sm">
+              <!-- Exemplo de lembre-me -->
+              <p-checkbox
+                name="checked"
+                [(ngModel)]="checked"
+                id="rememberme1"
+                binary
+              ></p-checkbox>
+              <label for="rememberme1">Lembre-me</label>
+            </div>
+            <!-- <span
+              class="font-medium no-underline text-right cursor-pointer text-primary text-sm sm:text-base"
+              >Esqueceu a senha?</span
+            > -->
+          </div>
+
+
         <p-button type="submit" label="Entrar" styleClass="w-full mt-4" [loading]="loading" />
+
       </form>
     </div>
   </div>

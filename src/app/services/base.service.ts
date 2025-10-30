@@ -14,8 +14,11 @@ export class BaseService {
 
   constructor(private http: HttpClient) {}
 
-
-  obterObjetoOpcoes(endpoint: string, nameParam: string, codeParam:string): Observable<FlagOption[]> {
+  obterObjetoOpcoes(
+    endpoint: string,
+    nameParam: string,
+    codeParam: string
+  ): Observable<FlagOption[]> {
     const url = `${this.apiUrl}/${endpoint}`;
 
     return this.http.get<any[]>(url).pipe(
@@ -151,12 +154,13 @@ export class BaseService {
         return res;
       }),
       catchError((e) => {
-        console.log(e)
+        console.log(e);
         this.exibirErros(e);
         return throwError(() => e);
       })
     );
   }
+
 
   exibirErros(e: any) {
     this.messageService.add({

@@ -3,21 +3,17 @@ import { AuthService } from './auth.service';
 import { inject } from '@angular/core';
 
 export const TenantInterceptor: HttpInterceptorFn = (req, next) => {
+  const auth = inject(AuthService);
+  const user = auth.getUserSubbject();
+  const idTenant = user?.idTenant;
 
-    const auth = inject(AuthService);
-   const user = auth.getUserSubbject();
-   const idTenant = user?.idTenant;
+  let headers = req.headers;
+  if (idTenant) {
+    headers = headers.set('X-Tenant-ID', idTenant);
+  }
 
-   console.log(idTenant);
+  console.log(headers);
 
-    // if (token) {
-    //   const cloned = req.clone({
-    //     setHeaders: {
-    //       Authorization: `${token}`,
-    //     },
-    //   });
-    //   return next(cloned);
-    // }
-
-    return next(req);
+  const authReq = req.clone({ headers });
+  return next(authReq);
 };
