@@ -10,6 +10,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 
 import { provideEnvironmentNgxMask } from 'ngx-mask';
 import ZincTheme from './layout/component/ZincTheme';
+import PurpleTheme from './layout/component/PurpleTheme';
 
 
 export const appConfig: ApplicationConfig = {
@@ -23,7 +24,7 @@ export const appConfig: ApplicationConfig = {
       ripple: true,
       inputVariant: 'filled',
       theme: {
-        preset: ZincTheme,
+        preset: PurpleTheme,
         options: { prefix: 'p', darkModeSelector: '.app-dark' },
       },
     }),
