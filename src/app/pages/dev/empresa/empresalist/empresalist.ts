@@ -57,7 +57,7 @@ export class Empresalist {
       filterType: 'text',
     },
     {
-      field: 'id_planoassinatura',
+      field: 'nm_planoassinatura',
       header: 'Plano',
       minWidth: '15rem',
       filterType: 'text',

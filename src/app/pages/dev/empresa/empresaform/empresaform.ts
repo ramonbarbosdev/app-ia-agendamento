@@ -77,7 +77,7 @@ export class Empresaform {
     this.loading = true;
     this.limparFormulario();
 
-    // this.obterAssinatura();
+    this.obterAssinatura();
 
     if (this.key == 0) {
       this.obterSequencia();

@@ -70,12 +70,12 @@ export class BaseService {
 
   findAll(endpoint: string): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
-
     return this.http.get<any>(url).pipe(
       tap((res) => {
         return res;
       }),
       catchError((e) => {
+        console.log(e)
         this.exibirErros(e);
         return throwError(() => e);
       })
