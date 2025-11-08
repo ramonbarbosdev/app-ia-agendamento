@@ -115,6 +115,7 @@ export class BaseService {
 
   create(endpoint: string, data: any): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
+        console.log(url );
 
     return this.http.post<any>(url, data).pipe(
       tap((res) => {

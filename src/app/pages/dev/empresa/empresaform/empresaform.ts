@@ -110,7 +110,7 @@ export class Empresaform {
     if (this.validarItens()) {
       this.loading = true;
 
-      this.baseService.create(`${this.endpoint}/`, this.objeto).subscribe({
+      this.baseService.create(`${this.endpoint}/cadastrar`, this.objeto).subscribe({
         next: () => {
           this.loading = false;
           this.hideDialog();
