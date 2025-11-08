@@ -25,11 +25,13 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { Usuarios } from '../../../../models/usuarios';
 import { FlagOption } from '../../../../models/flag-option';
 import { NgxMaskDirective } from 'ngx-mask';
-import { LayoutFormSimples } from "../../../../components/layouts/layout-form-simples/layout-form-simples";
-import { LayoutCampo } from "../../../../components/layout-campo/layout-campo";
+import { LayoutFormSimples } from '../../../../components/layouts/layout-form-simples/layout-form-simples';
+import { LayoutCampo } from '../../../../components/layout-campo/layout-campo';
 import { ConverterNomeRole } from '../../../../utils/ConverterNomeRole';
 import { UsuarioSchema } from '../../../../schema/usuario-schema';
-
+import { TabsModule } from 'primeng/tabs';
+import { Usuarioempresa } from '../../../../models/usuarioempresa';
+import { Usuarioempresadetail } from '../usuarioempresadetail/usuarioempresadetail';
 @Component({
   selector: 'app-usuarioform',
   imports: [
@@ -46,8 +48,10 @@ import { UsuarioSchema } from '../../../../schema/usuario-schema';
     PasswordModule,
     NgxMaskDirective,
     LayoutFormSimples,
-    LayoutCampo
-],
+    LayoutCampo,
+    TabsModule,
+    Usuarioempresadetail,
+  ],
   templateUrl: './usuarioform.html',
   styleUrl: './usuarioform.scss',
 })
@@ -59,6 +63,8 @@ export class Usuarioform {
 
   loading: boolean = true;
   public objeto: Usuarios = new Usuarios();
+  public itensUsuarioEmpresa: Usuarioempresa = new Usuarioempresa();
+  carregarDetalhes = false;
   public errorValidacao: Record<string, string> = {};
   private endpoint = 'usuario';
   private route = inject(ActivatedRoute);
@@ -70,6 +76,7 @@ export class Usuarioform {
     this.isDialog = false;
     this.isDialogChange.emit(false);
     this.limparFormulario();
+    this.carregarDetalhes = false;
   }
 
   onShow() {
@@ -79,10 +86,11 @@ export class Usuarioform {
     this.obterRole();
 
     if (this.key == 0) {
-         setTimeout(() => (this.loading = false), 0);
+      setTimeout(() => (this.loading = false), 0);
     } else {
       this.onEdit(this.key);
     }
+    this.carregarDetalhes = true;
   }
 
   onEdit(id: number) {
@@ -98,6 +106,7 @@ export class Usuarioform {
         this.objeto.role = res.roles[0];
         this.objeto.login = res.userLogin;
         this.objeto.senha = res.userSenha;
+        this.objeto.itensUsuarioEmpresa = res.itensUsuarioEmpresa;
         this.loading = false;
         this.cd.markForCheck();
       },
@@ -114,23 +123,20 @@ export class Usuarioform {
 
       this.objeto.roles = [{ nomeRole: this.objeto.role }];
 
-      if (this.objeto.id)
-      {
-         this.baseService.update(`${this.endpoint}/`, this.objeto).subscribe({
-           next: () => {
-             this.loading = false;
-             this.hideDialog();
-             this.onReloadList();
-             this.cd.markForCheck();
-           },
-           error: (erro) => {
-             this.loading = false;
-             this.cd.markForCheck();
-           },
-         });
-      }
-      else
-      {
+      if (this.objeto.id) {
+        this.baseService.update(`${this.endpoint}/`, this.objeto).subscribe({
+          next: () => {
+            this.loading = false;
+            this.hideDialog();
+            this.onReloadList();
+            this.cd.markForCheck();
+          },
+          error: (erro) => {
+            this.loading = false;
+            this.cd.markForCheck();
+          },
+        });
+      } else {
         this.baseService.create(`${this.endpoint}/`, this.objeto).subscribe({
           next: () => {
             this.loading = false;
@@ -144,7 +150,6 @@ export class Usuarioform {
           },
         });
       }
-        
     }
   }
 
@@ -171,19 +176,18 @@ export class Usuarioform {
     this.errorValidacao = {};
   }
 
-   obterRole() {
-      this.baseService.findAll(`role/`).subscribe({
-        next: (res) => {
-          this.listaRoles = (res as any).map((index: any) => {
-            const item = new FlagOption();
-            item.code = index.nomeRole;
-            item.name = ConverterNomeRole(index.nomeRole);
-            this.cd.markForCheck();
-            return item;
-          });
-        },
-        error: (err) => {},
-      });
-    }
-  
+  obterRole() {
+    this.baseService.findAll(`role/`).subscribe({
+      next: (res) => {
+        this.listaRoles = (res as any).map((index: any) => {
+          const item = new FlagOption();
+          item.code = index.nomeRole;
+          item.name = ConverterNomeRole(index.nomeRole);
+          this.cd.markForCheck();
+          return item;
+        });
+      },
+      error: (err) => {},
+    });
+  }
 }

@@ -26,7 +26,6 @@ import { FlagOption } from '../../../../models/flag-option';
 import { NgxMaskDirective } from 'ngx-mask';
 import { LayoutFormSimples } from '../../../../components/layouts/layout-form-simples/layout-form-simples';
 import { LayoutCampo } from '../../../../components/layout-campo/layout-campo';
-import { ConverterNomeRole } from '../../../../utils/ConverterNomeRole';
 import { Empresa } from '../../../../models/empresa';
 import { EmpresaSchema } from '../../../../schema/empresa-schema';
 import { ToggleButtonModule } from 'primeng/togglebutton';
@@ -44,7 +43,6 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
     ProgressSpinnerModule,
     SelectModule,
     PasswordModule,
-    NgxMaskDirective,
     LayoutFormSimples,
     LayoutCampo,
     ToggleButtonModule,

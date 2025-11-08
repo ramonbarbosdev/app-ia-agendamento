@@ -1,3 +1,5 @@
+import { Usuarioempresa } from "./usuarioempresa";
+
 export class Usuarios {
   public id!: number;
   public nome: string = '';
@@ -7,4 +9,6 @@ export class Usuarios {
   public role: string = '';
   public cargo: string = '';
   public roles!: any;
+
+  public itensUsuarioEmpresa: Usuarioempresa[] = [];
 }

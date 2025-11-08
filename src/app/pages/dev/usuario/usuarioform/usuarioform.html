@@ -11,7 +11,7 @@
     <app-layout-campo
       [error]="errorValidacao['login']"
       [label]="'Login: (*)'"
-      [width]="'w-1/12'"
+      [width]="'md:w-6/12'"
       [sublabel]="'Informe o login'"
       [describedby]="'login'"
     >
@@ -30,7 +30,7 @@
     <app-layout-campo
       [error]="errorValidacao['nome']"
       [label]="'Nome do usuario: (*)'"
-      [width]="'w-1/12'"
+      [width]="'md:w-6/12'"
       [sublabel]="'Informe o nome de usuario'"
       [describedby]="'nome'"
     >
@@ -50,7 +50,7 @@
     <app-layout-campo
       [error]="errorValidacao['senha']"
       [label]="'Senha: (*)'"
-      [width]="'w-6/12'"
+      [width]="'md:w-6/12'"
       [sublabel]="'Informe a senha de usuario'"
       [describedby]="'senha'"
     >
@@ -69,7 +69,7 @@
     <app-layout-campo
       [error]="errorValidacao['role']"
       [label]="'Permissão: (*)'"
-      [width]="'w-6/12'"
+      [width]="'md:w-6/12'"
       [sublabel]="'Informe a permissão'"
       [describedby]="'role'"
     >
@@ -87,4 +87,20 @@
       />
     </app-layout-campo>
   </div>
+
+  <p-tabs value="0">
+    <p-tablist>
+      <p-tab value="0">Empresas</p-tab>
+    </p-tablist>
+    <p-tabpanels>
+      <p-tabpanel value="0">
+        <app-usuarioempresadetail
+          [(objeto)]="objeto"
+          [itemTemp]="itensUsuarioEmpresa"
+          [nomeItem]="'itensUsuarioEmpresa'"
+          [carregarDados]="carregarDetalhes"
+        ></app-usuarioempresadetail>
+      </p-tabpanel>
+    </p-tabpanels>
+  </p-tabs>
 </app-layout-form-simples>
