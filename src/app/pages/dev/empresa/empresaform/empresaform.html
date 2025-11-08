@@ -6,12 +6,12 @@
   (cancel)="hideDialog()"
   (show)="onShow()"
 >
-  <!-- Linha 1: cd_empresa e nm_empresa -->
+ 
   <div class="flex-row-responsive">
     <app-layout-campo
       [error]="errorValidacao['cd_empresa']"
       [label]="'Código: (*)'"
-      [width]="'w-6/12'"
+      [width]="'md:w-4/12'"
       [sublabel]="'Informe o cd_empresa'"
       [describedby]="'Informe o código'"
     >
@@ -29,7 +29,7 @@
     <app-layout-campo
       [error]="errorValidacao['nm_empresa']"
       [label]="'Nome: (*)'"
-      [width]="'w-6/12'"
+      [width]="'w-8/12'"
       [sublabel]="'Informe o nome da emrpesa'"
       [describedby]="'nm_empresa'"
     >
@@ -49,7 +49,7 @@
     <app-layout-campo
       [error]="errorValidacao['id_planoassinatura']"
       [label]="'Plano: (*)'"
-      [width]="'w-6/12'"
+      [width]="'md:w-4/12'"
       [sublabel]="'Informe a plano'"
       [describedby]="'id_planoassinatura'"
     >
@@ -66,7 +66,7 @@
         [ngClass]="{ 'ng-dirty ng-invalid': errorValidacao['id_planoassinatura'] }"
       />
     </app-layout-campo>
-    <app-layout-campo [label]="'Email: '" [width]="'w-6/12'">
+    <app-layout-campo [label]="'Email: '" [width]="'md:w-6/12'">
       <input
         title="ds_email"
         pInputText
@@ -75,7 +75,7 @@
         class="w-full"
       />
     </app-layout-campo>
-    <app-layout-campo [label]="'Status: '" [width]="'w-6/12'">
+    <app-layout-campo [label]="'Status: '" [width]="'md:w-2/12'">
       <p-togglebutton
         [(ngModel)]="objeto.fl_ativo"
         onLabel="Ativo"
@@ -86,7 +86,7 @@
   </div>
 
   <div class="flex-row-responsive">
-    <app-layout-campo [label]="'Chave: '" [width]="'w-12/12'">
+    <app-layout-campo [label]="'Chave: '" [width]="'md:w-12/12'">
       <input
         title="id_tenant"
         pInputText

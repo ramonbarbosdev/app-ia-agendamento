@@ -9,7 +9,7 @@ import { MessageModule } from 'primeng/message';
   templateUrl: './layout-campo.html',
   styleUrl: './layout-campo.scss',
   host: {
-    '[class]': '"flex flex-col gap-2 md:" + width',
+    '[class]': 'width',
   },
 })
 export class LayoutCampo {
