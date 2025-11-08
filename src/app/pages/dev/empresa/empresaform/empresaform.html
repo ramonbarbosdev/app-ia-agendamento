@@ -76,8 +76,25 @@
       />
     </app-layout-campo>
     <app-layout-campo [label]="'Status: '" [width]="'w-6/12'">
-     <p-togglebutton [(ngModel)]="objeto.fl_ativo" onLabel="Ativo" offLabel="Inativo" class="w-full" />
+      <p-togglebutton
+        [(ngModel)]="objeto.fl_ativo"
+        onLabel="Ativo"
+        offLabel="Inativo"
+        class="w-full"
+      />
+    </app-layout-campo>
+  </div>
 
+  <div class="flex-row-responsive">
+    <app-layout-campo [label]="'Chave: '" [width]="'w-12/12'">
+      <input
+        title="id_tenant"
+        pInputText
+        id="id_tenant"
+        [(ngModel)]="objeto.id_tenant"
+        class="w-full"
+        [disabled]="true"
+      />
     </app-layout-campo>
   </div>
 </app-layout-form-simples>
