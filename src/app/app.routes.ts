@@ -6,6 +6,7 @@ import { HomeDev } from './pages/dev/home-dev/home-dev';
 import { HomeClient } from './pages/client/home-client/home-client';
 import { Usuariolist } from './pages/dev/usuario/usuariolist/usuariolist';
 import { Rolelist } from './pages/dev/role/rolelist/rolelist';
+import { Empresalist } from './pages/dev/empresa/empresalist/empresalist';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
@@ -20,6 +21,7 @@ export const routes: Routes = [
       { path: 'home', component: HomeDev },
       { path: 'usuario', component: Usuariolist },
       { path: 'role', component: Rolelist },
+      { path: 'empresa', component: Empresalist },
     ],
   },
   {
