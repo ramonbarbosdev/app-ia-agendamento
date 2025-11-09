@@ -123,33 +123,18 @@ export class Usuarioform {
 
       this.objeto.roles = [{ nomeRole: this.objeto.role }];
 
-      if (this.objeto.id) {
-        this.baseService.update(`${this.endpoint}/`, this.objeto).subscribe({
-          next: () => {
-            this.loading = false;
-            this.hideDialog();
-            this.onReloadList();
-            this.cd.markForCheck();
-          },
-          error: (erro) => {
-            this.loading = false;
-            this.cd.markForCheck();
-          },
-        });
-      } else {
-        this.baseService.create(`${this.endpoint}/`, this.objeto).subscribe({
-          next: () => {
-            this.loading = false;
-            this.hideDialog();
-            this.onReloadList();
-            this.cd.markForCheck();
-          },
-          error: (erro) => {
-            this.loading = false;
-            this.cd.markForCheck();
-          },
-        });
-      }
+       this.baseService.create(`${this.endpoint}/`, this.objeto).subscribe({
+         next: () => {
+           this.loading = false;
+           this.hideDialog();
+           this.onReloadList();
+           this.cd.markForCheck();
+         },
+         error: (erro) => {
+           this.loading = false;
+           this.cd.markForCheck();
+         },
+       });  
     }
   }
 
