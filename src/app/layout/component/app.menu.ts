@@ -30,6 +30,11 @@ export class AppMenu {
         label: 'Administração',
         items: [
           {
+            label: 'Painel',
+            icon: 'pi pi-fw pi-bookmark',
+            routerLink: ['/dev/home'],
+          },
+          {
             label: 'Empresas',
             icon: 'pi pi-fw pi-bookmark',
             routerLink: ['/dev/empresa'],
