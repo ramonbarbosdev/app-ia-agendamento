@@ -12,3 +12,11 @@ export function ConverterNomeRole(roleName: string) {
 
   return nomeLegivel;
 }
+
+export function ConverterNomeRoleMinusculo(roleName: string): string {
+  if (!roleName) return '';
+
+  const semPrefixo = roleName.startsWith('ROLE_') ? roleName.slice(5) : roleName;
+
+  return semPrefixo.toLowerCase();
+}

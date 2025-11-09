@@ -35,7 +35,7 @@ export const routes: Routes = [
     path: 'client',
     component: AppLayout,
     canActivateChild: [authGuard],
-    data: { roles: ['admin', 'dev', 'client'] },
+    data: { roles: ['admin', 'dev'  , 'usuario'] },
     children: [{ path: 'home', component: HomeClient }],
   },
 ];

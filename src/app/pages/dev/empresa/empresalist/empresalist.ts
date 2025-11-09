@@ -62,6 +62,13 @@ export class Empresalist {
       minWidth: '15rem',
       filterType: 'text',
     },
+    {
+      field: 'fl_ativo',
+      header: 'Status',
+      minWidth: '15rem',
+      filterType: 'boolean',
+       formatter: (value) => value ? 'Sim' : 'Não'
+    },
   ];
 
   actions: ActionConfig[] = [
@@ -97,7 +104,7 @@ export class Empresalist {
         const novaListagem: Empresa[] = [];
         Object.values(res as any).forEach((index: any) => {
           let item = new Empresa();
-           item = index;
+          item = index;
           novaListagem.push(item);
         });
         this.listagem = novaListagem;

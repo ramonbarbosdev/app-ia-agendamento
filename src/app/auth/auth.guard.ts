@@ -2,6 +2,7 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { FormatarNomeRole } from '../utils/FormatarNomeRole';
+import { ConverterNomeRoleMinusculo } from '../utils/ConverterNomeRole';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
@@ -15,7 +16,13 @@ export const authGuard: CanActivateFn = (route, state) => {
     return false;
   }
 
-  const userRole = FormatarNomeRole(user.role).toLowerCase();
+  // OBS: lembrar de configurar o papel nas rotas
+  const userRole = ConverterNomeRoleMinusculo(user.role);
+
+  if(userRole === '')
+  {
+    console.error('Não existe formatação equivalente para o ' + user.role);
+  }
 
   const roles = rolesPermitidos?.map((r) => r.toLowerCase()) ?? ['admin', 'dev'];
 

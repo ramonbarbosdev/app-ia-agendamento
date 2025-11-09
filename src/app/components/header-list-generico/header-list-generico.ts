@@ -1,4 +1,12 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Table, TableModule } from 'primeng/table';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
@@ -6,6 +14,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule, ButtonSeverity } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ConfirmationService } from 'primeng/api';
 
 export interface ColumnConfig {
   field: string;
@@ -23,6 +32,7 @@ export interface ActionConfig {
   rounded?: boolean;
   outlined?: boolean;
   onClick: (row: any) => void;
+  requiresConfirmation?: boolean;
 }
 
 @Component({
@@ -50,6 +60,8 @@ export class HeaderListGenerico {
   @Output() clearFilters = new EventEmitter<void>();
 
   globalFilterFields: string[] = [];
+
+  private confirmationService = inject(ConfirmationService);
 
   @ViewChild('filter') filter!: ElementRef;
   @ViewChild('dt') tabela!: Table;
@@ -87,4 +99,23 @@ export class HeaderListGenerico {
   //  formatter: (value) => value ? 'Sim' : 'Não'
   //  formatter: (value) => `R$ ${value.toFixed(2)}`
   //    formatter: (value) => new Date(value).toLocaleDateString('pt-BR')
+
+  executarAcao(row: any, acao: ActionConfig) {
+    const isEditAction =
+      acao.label?.toLowerCase().includes('editar') || acao.icon === 'pi pi-pencil';
+
+    const precisaConfirmar = !isEditAction && (acao.requiresConfirmation ?? true);
+
+    if (precisaConfirmar) {
+      this.confirmationService.confirm({
+        message: 'Tem certeza de que deseja continuar?',
+        header: 'Confirmação',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => acao.onClick(row),
+        reject: () => {},
+      });
+    } else {
+      acao.onClick(row);
+    }
+  }
 }
