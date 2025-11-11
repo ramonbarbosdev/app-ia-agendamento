@@ -29,11 +29,11 @@ export class Novasessao {
   private endpoint = 'whatsappsessao';
   public errorValidacao: Record<string, string> = {};
 
-  public objeto: any = { nomeSessao: '' };
+  public objeto: any = { nm_sessao: '' };
 
   onSave() {
     if (this.validarItens()) {
-      this.baseService.create(`${this.endpoint}/cadastrar`, this.objeto).subscribe({
+      this.baseService.create(`${this.endpoint}/iniciar-sessao`, this.objeto).subscribe({
         next: () => {
           this.hideDialog();
         },

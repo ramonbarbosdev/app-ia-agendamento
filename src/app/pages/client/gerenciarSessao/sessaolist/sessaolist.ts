@@ -11,7 +11,7 @@ import {
   ColumnConfig,
   HeaderListGenerico,
 } from '../../../../components/header-list-generico/header-list-generico';
-import { Novasessao } from "../novasessao/novasessao";
+import { Novasessao } from '../novasessao/novasessao';
 @Component({
   selector: 'app-sessaolist',
   imports: [
@@ -21,8 +21,8 @@ import { Novasessao } from "../novasessao/novasessao";
     InputTextModule,
     ButtonModule,
     HeaderListGenerico,
-    Novasessao
-],
+    Novasessao,
+  ],
   templateUrl: './sessaolist.html',
   styleUrl: './sessaolist.scss',
 })
@@ -40,29 +40,19 @@ export class Sessaolist {
 
   columns: ColumnConfig[] = [
     {
-      field: 'cd_empresa',
+      field: 'id_whatsappsessao',
       header: 'Código',
-      minWidth: '10rem',
-      filterType: 'text',
+      minWidth: '8rem',
     },
     {
-      field: 'nm_empresa',
-      header: 'Nome',
-      minWidth: '15rem',
-      filterType: 'text',
+      field: 'nm_whatsappsessao',
+      header: 'Nome da Sessão',
+      minWidth: '20rem',
     },
     {
-      field: 'nm_planoassinatura',
-      header: 'Plano',
-      minWidth: '15rem',
-      filterType: 'text',
-    },
-    {
-      field: 'fl_ativo',
+      field: 'tp_status',
       header: 'Status',
-      minWidth: '15rem',
-      filterType: 'boolean',
-      formatter: (value) => (value ? 'Sim' : 'Não'),
+      minWidth: '20rem',
     },
   ];
 
@@ -96,14 +86,13 @@ export class Sessaolist {
 
     this.baseService.findAll(`${this.endpoint}/`).subscribe({
       next: (res) => {
-        console.log(res);
-        // const novaListagem: Empresa[] = [];
-        // Object.values(res as any).forEach((index: any) => {
-        //   let item = new Empresa();
-        //   item = index;
-        //   novaListagem.push(item);
-        // });
-        // this.listagem = novaListagem;
+        const novaListagem: any[] = [];
+        Object.values(res as any).forEach((index: any) => {
+          let item = {};
+          item = index;
+          novaListagem.push(item);
+        });
+        this.listagem = novaListagem;
         this.loading = false;
         this.cd.markForCheck();
       },

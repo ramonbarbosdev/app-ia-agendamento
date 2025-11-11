@@ -9,19 +9,19 @@
   <span class="p-text-secondary block mb-8">Crie uma nova sessão para Whatsapp.</span>
   <div class="flex-row-responsive">
     <app-layout-campo
-      [error]="errorValidacao['nomeSessao']"
+      [error]="errorValidacao['nm_sessao']"
       [label]="'Nome da sessão: (*) '"
       [width]="'md:w-12/12'"
       [sublabel]="'Informe o nome da sessão'"
-      [describedby]="'nomeSessao'"
+      [describedby]="'nm_sessao'"
     >
       <input
-        title="nomeSessao"
+        title="nm_sessao"
         pInputText
-        id="nomeSessao"
-        [(ngModel)]="objeto.nomeSessao"
+        id="nm_sessao"
+        [(ngModel)]="objeto.nm_sessao"
         class="w-full"
-        [ngClass]="{ 'ng-dirty ng-invalid': errorValidacao['nomeSessao'] }"
+        [ngClass]="{ 'ng-dirty ng-invalid': errorValidacao['nm_sessao'] }"
 
       />
     </app-layout-campo>
