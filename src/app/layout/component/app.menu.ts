@@ -63,6 +63,11 @@ export class AppMenu {
               icon: 'pi pi-fw pi-home',
               routerLink: ['/client/home'],
             },
+            {
+              label: 'Gerenciamento de Sessão',
+              icon: 'pi pi-fw pi-home',
+              routerLink: ['/client/whatsappsessao'],
+            },
           ],
         },
       ];

@@ -7,6 +7,7 @@ import { HomeClient } from './pages/client/home-client/home-client';
 import { Usuariolist } from './pages/dev/usuario/usuariolist/usuariolist';
 import { Rolelist } from './pages/dev/role/rolelist/rolelist';
 import { Empresalist } from './pages/dev/empresa/empresalist/empresalist';
+import { Sessaolist } from './pages/client/gerenciarSessao/sessaolist/sessaolist';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
@@ -35,7 +36,10 @@ export const routes: Routes = [
     path: 'client',
     component: AppLayout,
     canActivateChild: [authGuard],
-    data: { roles: ['admin', 'dev'  , 'usuario'] },
-    children: [{ path: 'home', component: HomeClient }],
+    data: { roles: ['admin', 'dev', 'usuario'] },
+    children: [
+      { path: 'home', component: HomeClient },
+      { path: 'whatsappsessao', component: Sessaolist },
+    ],
   },
 ];

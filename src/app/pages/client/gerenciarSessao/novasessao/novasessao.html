@@ -1,0 +1,35 @@
+<p-dialog
+  header="Conectar Whatsapp"
+  [modal]="true"
+  [(visible)]="isDialog"
+  [style]="{ width: '25rem' }"
+  (onHide)="hideDialog()"
+  appendTo="body"
+>
+  <span class="p-text-secondary block mb-8">Crie uma nova sessão para Whatsapp.</span>
+  <div class="flex-row-responsive">
+    <app-layout-campo
+      [error]="errorValidacao['nomeSessao']"
+      [label]="'Nome da sessão: (*) '"
+      [width]="'md:w-12/12'"
+      [sublabel]="'Informe o nome da sessão'"
+      [describedby]="'nomeSessao'"
+    >
+      <input
+        title="nomeSessao"
+        pInputText
+        id="nomeSessao"
+        [(ngModel)]="objeto.nomeSessao"
+        class="w-full"
+        [ngClass]="{ 'ng-dirty ng-invalid': errorValidacao['nomeSessao'] }"
+
+      />
+    </app-layout-campo>
+  </div>
+
+  <div class="flex justify-end gap-2 mt-4">
+        <p-button label="Salvar" icon="pi pi-check" (click)="onSave()" />
+
+  </div>
+
+</p-dialog>

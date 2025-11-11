@@ -11,11 +11,9 @@ import {
   ColumnConfig,
   HeaderListGenerico,
 } from '../../../../components/header-list-generico/header-list-generico';
-import { Empresa } from '../../../../models/empresa';
-import { Empresaform } from '../empresaform/empresaform';
-
+import { Novasessao } from "../novasessao/novasessao";
 @Component({
-  selector: 'app-empresalist',
+  selector: 'app-sessaolist',
   imports: [
     TableModule,
     IconFieldModule,
@@ -23,17 +21,17 @@ import { Empresaform } from '../empresaform/empresaform';
     InputTextModule,
     ButtonModule,
     HeaderListGenerico,
-    Empresaform,
-  ],
-  templateUrl: './empresalist.html',
-  styleUrl: './empresalist.scss',
+    Novasessao
+],
+  templateUrl: './sessaolist.html',
+  styleUrl: './sessaolist.scss',
 })
-export class Empresalist {
+export class Sessaolist {
   loading: boolean = true;
-  public listagem: Empresa[] = [];
+  public listagem: any[] = [];
   public baseService = inject(BaseService);
-  endpoint = 'empresa';
-  primaryKey = 'id_empresa';
+  endpoint = 'whatsappsessao';
+  primaryKey = 'id_whatsappsessao';
   router = inject(Router);
   private route = inject(ActivatedRoute);
   isDialog: boolean = false;
@@ -64,7 +62,7 @@ export class Empresalist {
       header: 'Status',
       minWidth: '15rem',
       filterType: 'boolean',
-       formatter: (value) => value ? 'Sim' : 'Não'
+      formatter: (value) => (value ? 'Sim' : 'Não'),
     },
   ];
 
@@ -98,13 +96,14 @@ export class Empresalist {
 
     this.baseService.findAll(`${this.endpoint}/`).subscribe({
       next: (res) => {
-        const novaListagem: Empresa[] = [];
-        Object.values(res as any).forEach((index: any) => {
-          let item = new Empresa();
-          item = index;
-          novaListagem.push(item);
-        });
-        this.listagem = novaListagem;
+        console.log(res);
+        // const novaListagem: Empresa[] = [];
+        // Object.values(res as any).forEach((index: any) => {
+        //   let item = new Empresa();
+        //   item = index;
+        //   novaListagem.push(item);
+        // });
+        // this.listagem = novaListagem;
         this.loading = false;
         this.cd.markForCheck();
       },
