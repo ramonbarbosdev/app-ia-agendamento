@@ -50,6 +50,11 @@ export class Sessaolist {
       minWidth: '20rem',
     },
     {
+      field: 'qrcode',
+      header: 'QR Code',
+      minWidth: '10rem',
+    },
+    {
       field: 'tp_status',
       header: 'Status',
       minWidth: '20rem',

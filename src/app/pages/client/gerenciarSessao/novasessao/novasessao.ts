@@ -29,13 +29,16 @@ export class Novasessao {
   private endpoint = 'whatsappsessao';
   public errorValidacao: Record<string, string> = {};
 
-  public objeto: any = { nm_sessao: '' };
+  public objeto: any = { nm_sessao: '', qrCode: ''};
 
   onSave() {
     if (this.validarItens()) {
       this.baseService.create(`${this.endpoint}/iniciar-sessao`, this.objeto).subscribe({
-        next: () => {
-          this.hideDialog();
+        next: (res) => {
+
+          // if ( res.qrcode) {
+          //   this.objeto.qrCode = 'data:image/png;base64,' + res.qrcode;
+          // }
         },
         error: (erro) => {},
       });

@@ -22,14 +22,20 @@
         [(ngModel)]="objeto.nm_sessao"
         class="w-full"
         [ngClass]="{ 'ng-dirty ng-invalid': errorValidacao['nm_sessao'] }"
-
       />
     </app-layout-campo>
   </div>
 
-  <div class="flex justify-end gap-2 mt-4">
-        <p-button label="Salvar" icon="pi pi-check" (click)="onSave()" />
+  <!-- <div *ngIf="objeto.qrCode" class="qr-container">
+    <h3>Escaneie o QR Code abaixo no seu WhatsApp:</h3>
+    <img [src]="objeto.qrCode" alt="QR Code do WhatsApp" style="width: 250px; height: 250px" />
+  </div> -->
 
+  <div *ngIf="!objeto.qrCode">
+    <p>Clique em "Iniciar Sessão" para gerar o QR Code.</p>
   </div>
 
+  <div class="flex justify-end gap-2 mt-4">
+    <p-button label="Iniciar Sessão" icon="pi pi-check" (click)="onSave()" />
+  </div>
 </p-dialog>
