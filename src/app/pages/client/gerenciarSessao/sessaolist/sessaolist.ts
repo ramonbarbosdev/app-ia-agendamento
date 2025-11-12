@@ -12,6 +12,7 @@ import {
   HeaderListGenerico,
 } from '../../../../components/header-list-generico/header-list-generico';
 import { Novasessao } from '../novasessao/novasessao';
+import { ExibirQrcode } from "../exibir-qrcode/exibir-qrcode";
 @Component({
   selector: 'app-sessaolist',
   imports: [
@@ -22,6 +23,7 @@ import { Novasessao } from '../novasessao/novasessao';
     ButtonModule,
     HeaderListGenerico,
     Novasessao,
+    ExibirQrcode,
   ],
   templateUrl: './sessaolist.html',
   styleUrl: './sessaolist.scss',
@@ -36,6 +38,8 @@ export class Sessaolist {
   private route = inject(ActivatedRoute);
   isDialog: boolean = false;
   idEdicao!: number;
+  isDialogQRCode: boolean = false;
+  idEdicaoQRCode!: number;
   constructor(private cd: ChangeDetectorRef) {}
 
   columns: ColumnConfig[] = [
@@ -69,6 +73,21 @@ export class Sessaolist {
       onClick: (row) => this.onEdit(row),
     },
     {
+      icon: 'pi pi-play',
+      severity: 'info',
+      rounded: true,
+      outlined: true,
+      onClick: (row) => this.onPlay(row),
+      requiresConfirmation: false,
+    },
+    {
+      icon: 'pi pi-power-off',
+      severity: 'info',
+      rounded: true,
+      outlined: true,
+      onClick: (row) => this.onPause(row),
+    },
+    {
       icon: 'pi pi-trash',
       severity: 'danger',
       rounded: true,
@@ -80,6 +99,7 @@ export class Sessaolist {
   onAdd() {
     this.idEdicao = 0;
     this.isDialog = true;
+   
   }
 
   ngOnInit(): void {
@@ -109,12 +129,12 @@ export class Sessaolist {
   };
 
   onEdit(item: any) {
-    if (item && item[this.primaryKey]) {
-      this.idEdicao = item[this.primaryKey];
-      this.isDialog = true;
-    } else {
-      console.error('ID está indefinido');
-    }
+    // if (item && item[this.primaryKey]) {
+    //   this.idEdicao = item[this.primaryKey];
+    //   this.isDialog = true;
+    // } else {
+    //   console.error('ID está indefinido');
+    // }
   }
 
   onDelete(item: any) {
@@ -128,5 +148,25 @@ export class Sessaolist {
         this.loading = false;
       },
     });
+  }
+  onPause(item: any) {
+    this.loading = true;
+    this.baseService.deleteById(`${this.endpoint}/encerrar`, item[this.primaryKey]).subscribe({
+      next: (res) => {
+        this.loading = false;
+        this.onShow();
+      },
+      error: (err) => {
+        this.loading = false;
+      },
+    });
+  }
+  onPlay(item: any) {
+    if (item && item[this.primaryKey]) {
+      this.idEdicaoQRCode = item[this.primaryKey];
+      this.isDialogQRCode = true;
+    } else {
+      console.error('ID está indefinido');
+    }
   }
 }

@@ -33,12 +33,12 @@ export class Novasessao {
 
   onSave() {
     if (this.validarItens()) {
-      this.baseService.create(`${this.endpoint}/iniciar-sessao`, this.objeto).subscribe({
+      this.baseService.create(`${this.endpoint}/criar-sessao`, this.objeto).subscribe({
         next: (res) => {
-
           // if ( res.qrcode) {
           //   this.objeto.qrCode = 'data:image/png;base64,' + res.qrcode;
           // }
+          this.hideDialog();
         },
         error: (erro) => {},
       });
